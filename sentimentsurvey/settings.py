@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-+-*#d1dqc@luskja9=lme+_zz#tbegi@s%0-vltbxw_f2t5d0o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["survey.swarm.svana.name", "localhost"]
 
 
 # Application definition
