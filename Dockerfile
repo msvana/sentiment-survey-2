@@ -7,7 +7,6 @@ WORKDIR /app
 
 COPY . /app
 RUN chmod +x /app/entrypoint.sh
-RUN python manage.py collectstatic --noinput
 VOLUME /app/db/
 
 EXPOSE 8000
