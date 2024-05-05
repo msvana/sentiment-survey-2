@@ -33,6 +33,10 @@ def submit(request):
     user_id = UUID(request.session.get("user_id", None))
     question_no = int(request.session.get("question_no", "1"))
     question_id = (question_no - 1) // 2
+
+    if question_id >= len(questions.QUESTIONS) - 1:
+        return redirect("end")
+
     question = questions.QUESTIONS[question_id]
     question_variant = int(request.POST["variant"])
     if question_variant == -1:
@@ -51,7 +55,6 @@ def submit(request):
         importance=importance,
     )
     answer.save()
-    print(user_id, question_id, question_variant, question_text, sentiment, importance)
 
     request.session["question_no"] = question_no + 1
     request.session["prev_sentiment"] = sentiment
@@ -63,3 +66,6 @@ def reset(request):
     request.session["prev_sentiment"] = 50
     request.session["user_id"] = str(uuid4())
     return redirect("question")
+
+def end(request):
+    return render(request, "end.html")
