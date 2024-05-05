@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hr>
+<p>Doplnit instrukce</p>
+
+<hr>
+
+<h2>Tweet {{question_no}}/20</h2>
+
+<div class="alert alert-info">{{question_text | safe}}</div>
+
+<form action="/submit/" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="variant" value="{{question_variant}}">
+	<hr>
+	<label for="sentiment-range" class="form-label"><strong>Sentiment:</strong></label>
+	<input type="range" class="form-range" id="sentiment-range" name="sentiment" min="0" max="100"
+		value="{{sentiment}}" />
+	<div class="row">
+		<div class="col">
+			<p>Absolutně Negativní</p>
+		</div>
+		<div class="col text-center">
+			<p>Neutrální</p>
+		</div>
+		<div class="col text-end">
+			<p>Absolutně Pozitivní</p>
+		</div>
+	</div>
+
+	{% if show_importance %}
+	<hr>
+	<label for="importance-range" class="form-label"><strong>Důležitost tématu:</strong></label>
+	<input type="range" class="form-range" id="importance-range" name="importance" min="0" max="100" />
+	<div class="row">
+		<div class="col">
+			<p>Nedůležíté</p>
+		</div>
+		<div class="col text-end">
+			<p>Velmi důležité</p>
+		</div>
+	</div>
+	{% endif %}
+
+	<hr>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary">Pokračovat</button>
+	</div>
+</form>
+{% endblock %}
