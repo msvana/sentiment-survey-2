@@ -35,9 +35,6 @@ def submit(request):
     question_no = int(request.session.get("question_no", "1"))
     question_id = (question_no - 1) // 2
 
-    if question_no >= len(questions.QUESTIONS) * 2:
-        return redirect("importance")
-
     question = questions.QUESTIONS[question_id]
     question_variant = int(request.POST["variant"])
     if question_variant == -1:
@@ -53,6 +50,9 @@ def submit(request):
         sentiment=sentiment,
     )
     answer.save()
+
+    if question_no >= len(questions.QUESTIONS) * 2:
+        return redirect("importance")
 
     request.session["question_no"] = question_no + 1
     request.session["prev_sentiment"] = sentiment

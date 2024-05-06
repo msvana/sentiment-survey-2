@@ -63,7 +63,7 @@ QUESTIONS = [
         [
             "O krůček zase blíže do propasti. <strong>železniční společnost zvýšila svůj dluh meziročně o dalších 30 %</strong>. Může mi někdo vysvětlit, jak se něco takového vůbec může stát?",
             "O krůček zase blíže do propasti. <strong>deficit státního rozpočtu se zvýšil meziročně o dalších 30 %</strong>. Může mi někdo vysvětlit, jak se něco takového vůbec může stát?",
-            "O krůček zase blíže do propasti. <strong>zprávy z bojiště ukázaly stále rostoucí ztráty, a to až o 30 %</strong. Může mi někdo vysvětlit, jak se něco takového vůbec může stát?",
+            "O krůček zase blíže do propasti. <strong>zprávy z bojiště ukázaly stále rostoucí ztráty, a to až o 30 %</strong>. Může mi někdo vysvětlit, jak se něco takového vůbec může stát?",
         ]
     ),
     Question(
@@ -79,7 +79,7 @@ QUESTIONS = [
         [
             "Úplná katastrofa. <strong>Nové městské divadlo se zřítilo pouhý týden po otevření.</strong> To je nepřijatelné!",
             "Úplná katastrofa. <strong>Obrovský pád akciového trhu způsobil masivní finanční ztráty.</strong> To je nepřijatelné!",
-            "Úplná katastrofa. <strong>Obrovský pád akciového trhu způsobil masivní finanční ztráty.</strong> To je nepřijatelné!",
+            "Úplná katastrofa. <strong>Neúspěšná mírová jednání vedla k obnovení bojů.</strong> To je nepřijatelné!",
         ]
     ),
     Question(
@@ -87,7 +87,7 @@ QUESTIONS = [
         [
             "Docela dobrý. <strong>Otevřeli novou knihovnu.</strong> Vidět, že se věci hýbou.",
             "Docela dobrý. <strong>Mírný růst HDP tento kvartál.</strong> Vidět, že se věci hýbou.",
-            "Docela dobrý. <strong>Mírný růst HDP tento kvartál.</strong> Vidět, že se věci hýbou.",
+            "Docela dobrý. <strong>Pokrok v mírových rozhovorech.</strong> Vidět, že se věci hýbou.",
         ]
     ),
     Question(
