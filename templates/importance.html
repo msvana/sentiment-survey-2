@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hr>
+<p>
+	Na závěr prosím ještě zhodnoťte jak moc jsou pro vás důležitá témata, ke kterým se vztahovaly
+	tweety, které jste právě hodnotil/a.
+</p>
+
+<hr>
+
+<h2>Důležitost tématů</h2>
+
+
+<form action="/submit/importance/" method="post">
+	{% csrf_token %}
+	{% for topic in topics %}
+	<hr>
+	<label for="importance-range-{{forloop.counter}}" class="form-label"><strong>{{topic}}:</strong></label>
+	<input type="range" class="form-range" id="importance-range-{{forloop.counter}}" name="{{topic}}" min="0" max="100"
+		value="50" />
+	<div class="row">
+		<div class="col">
+			<p>Nedůležíté</p>
+		</div>
+		<div class="col text-end">
+			<p>Velmi důležité</p>
+		</div>
+	</div>
+	{% endfor %}
+
+
+	<hr>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary">Odeslat</button>
+	</div>
+</form>
+{% endblock %}

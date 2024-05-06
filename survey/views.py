@@ -1,5 +1,8 @@
+import random
 from uuid import UUID, uuid4
-from django.shortcuts import render, redirect
+
+from django.shortcuts import redirect, render
+
 from . import questions
 from . import models
 
@@ -18,12 +21,10 @@ def question(request):
     else:
         question_text, question_variant = question.get_random_filled()
         sentiment = int(request.session.get("prev_sentiment", 50))
-    show_importance = question_no % 2 == 0
     context = {
         "question_no": question_no,
         "question_text": question_text,
         "question_variant": question_variant,
-        "show_importance": show_importance,
         "sentiment": sentiment,
     }
     return render(request, "question.html", context)
@@ -35,7 +36,7 @@ def submit(request):
     question_id = (question_no - 1) // 2
 
     if question_id >= len(questions.QUESTIONS) - 1:
-        return redirect("end")
+        return redirect("importance")
 
     question = questions.QUESTIONS[question_id]
     question_variant = int(request.POST["variant"])
@@ -44,15 +45,12 @@ def submit(request):
     else:
         question_text = question.filled_texts[question_variant]
     sentiment = int(request.POST["sentiment"])
-    importance = int(request.POST.get("importance", "-1"))
-
     answer = models.SentimentAnswer(
         user_id=user_id,
         question_id=question_id,
         question_variant=question_variant,
         question_text=question_text,
         sentiment=sentiment,
-        importance=importance,
     )
     answer.save()
 
@@ -61,11 +59,42 @@ def submit(request):
     return redirect("question")
 
 
+def importance(request):
+    topics = ["Pohodlí a zábava", "Ekonomický vývoj", "Vojenské konflikty"]
+    random.shuffle(topics)
+    user_id = request.session.get("user_id", None)
+    if user_id is None:
+        request.session["user_id"] = str(uuid4())
+
+    context = {
+        "topics": topics,
+    }
+    return render(request, "importance.html", context)
+
+
+def submit_importance(request):
+    user_id = UUID(request.session.get("user_id", None))
+
+    for key in request.POST.keys():
+        if key.startswith("csrf"):
+            continue
+        topic = key
+        importance = int(request.POST[key])
+        answer = models.ImportanceAnswer(
+            user_id=user_id,
+            topic=topic,
+            importance=importance,
+        )
+        answer.save()
+    return redirect("end")
+
+
 def reset(request):
     request.session["question_no"] = 1
     request.session["prev_sentiment"] = 50
     request.session["user_id"] = str(uuid4())
     return redirect("question")
+
 
 def end(request):
     return render(request, "end.html")
