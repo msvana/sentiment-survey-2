@@ -97,4 +97,7 @@ def reset(request):
 
 
 def end(request):
+    request.session["question_no"] = 1
+    request.session["prev_sentiment"] = 50
+    request.session["user_id"] = str(uuid4())
     return render(request, "end.html")
