@@ -35,7 +35,7 @@ def submit(request):
     question_no = int(request.session.get("question_no", "1"))
     question_id = (question_no - 1) // 2
 
-    if question_id >= len(questions.QUESTIONS) - 1:
+    if question_no >= len(questions.QUESTIONS) * 2:
         return redirect("importance")
 
     question = questions.QUESTIONS[question_id]
